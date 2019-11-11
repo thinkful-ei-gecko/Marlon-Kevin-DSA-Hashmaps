@@ -8,10 +8,14 @@ class HashMap {
     this._deleted = 0;
   }
 
+  values() {
+    return this._hashTable.map((el) => el.value);
+  }
+
   get(key) {
     const index = this._findSlot(key);
     if (this._hashTable[index] === undefined) {
-      throw new Error('Key error');
+      return [];
     }
     return this._hashTable[index].value;
   }

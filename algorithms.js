@@ -36,11 +36,10 @@ function isPalindrome(string) {
     let value;
     try {
       value = hm.get(key);
-    } catch (error) { }
+    } catch (error) {}
     if (value !== undefined) {
       hm.set(key, ++value);
-    }
-    else {
+    } else {
       hm.set(key, 1);
     }
   }
@@ -62,78 +61,42 @@ let testString2 = 'd0tet0d';
 // console.log(isPalindrome(testString2));
 
 function stringToHashMap(string) {
-  let hm = new HashMap;
-  for (let i = 0; i < string.length; i++){
+  let hm = new HashMap();
+  for (let i = 0; i < string.length; i++) {
     let key = string[i];
     let value;
 
-    try{
+    try {
       value = hm.get(key);
-    }
-    catch(err){}
-    if(value !== undefined){
+    } catch (err) {}
+    if (value !== undefined) {
       hm.set(key, ++value);
-    }
-    else{
+    } else {
       hm.set(key, 1);
     }
   }
-  
+
   return hm;
 }
 
-// function isAnagram(string1, string2){
-//   for (let i = 0; i < hm.length; i++){
-//     let key = string[i];
-//     let value;
-//     try{
-//       value = hm.get(key);
-//     }
-//     catch(err){
-//       return false;
-//     }
-//   }
-// }
-
-function anagram(words){
-  let resultshm = new HashMap;
-  while(words.length){
-    resultshm.set(words[0], []);
-    for(let i = 0; i < words.length; i++) {
-      let hm1 = stringToHashMap(words[i]);
-      let wordToCheck1 = words[i];
-      resultshm.set(wordToCheck1, []);
-  
-      for(let j = i + 1; j < words.length; j++){
-        let wordToCheck2 = words[j];
-        let hm2 = stringToHashMap(words[j]);
-        for(let k = 0; k < wordToCheck1.length; k++){
-          let key = wordToCheck1[k];
-   
-          let value = hm1.get(key);
-          let value2;
-  
-          try {
-            value2 = hm2.get(key);
-          }
-          catch(error){
-            //not an anagram
-          }
-          if(value === value2){
-            resultshm.get(wordToCheck1).push(wordToCheck2);
-            words.slice(0, j);
-          }
-        }
-      }
-      words.slice(0, i);
-    }
+function anagram(words) {
+  let resultsHash = new HashMap();
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    let key = word.split('').sort().join(''); // aest
+    let value = resultsHash.get(key);
+    resultsHash.set(key, [...value, word]);
   }
 
-
-  return resultshm;
+  return resultsHash;
 }
 
 let wordsArray = ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race'];
+let results = anagram(wordsArray);
+console.log(results.values());
 
-console.log(anagram(wordsArray));
-
+// {
+//  aest: [east, teas, eats],
+//  acrs: [cars, arcs],
+//  acer: [acre, race],
+// }
