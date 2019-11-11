@@ -1,0 +1,1 @@
+This repo contains the hashmap drills done as a pair assignment by Marlon and Kevin for lesson 7 in the data structures and algorithms module of the Thinkful curriculum.
